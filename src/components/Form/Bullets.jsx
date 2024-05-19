@@ -4,9 +4,17 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Button, Form, FormGroup, InputGroup } from "react-bootstrap";
 
-export const Bullets = (
-  { bullets, bulletText, handleBulletTextChange, addBullet, removeBullet }
-) => {
+export const Bullets = ({
+  bullets,
+  bulletText,
+  handleBulletTextChange,
+  addBullet,
+  removeBullet,
+  editBulletText,
+  editedBulletId,
+  setEditedBulletId,
+  setNewBulletText,
+}) => {
   return <FormGroup>
     <Form.Label>Product Bullets</Form.Label>
     <InputGroup className="mb-3">
@@ -29,7 +37,14 @@ export const Bullets = (
 
     <div className="d-flex flex-column align-center">
       <DndProvider backend={HTML5Backend}>
-        <DropZone bullets={bullets} removeBullet={removeBullet} />
+        <DropZone
+          bullets={bullets}
+          removeBullet={removeBullet}
+          editBulletText={editBulletText}
+          editedBulletId={editedBulletId}
+          setEditedBulletId={setEditedBulletId}
+          setNewBulletText={setNewBulletText}
+        />
       </DndProvider>
     </div>
   </FormGroup>

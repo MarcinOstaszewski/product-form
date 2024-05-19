@@ -1,11 +1,23 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { AiFillEdit } from "react-icons/ai";
 
-export function Draggable(
-  { bullet, moveRow, index, removeBullet }
-) {
+export function Draggable({
+  bullet,
+  moveRow,
+  index,
+  removeBullet,
+  editedBulletId,
+  editBulletText,
+  setNewBulletText,
+}) {
   const { id, bulletText } = bullet;
   const ref = useRef(null);
+  const onKeyUp = (e) => {
+    if (e.code === "Enter") {
+      setNewBulletText(e.target.value, id)
+    }
+  }
 
   const [collectedProps, drop] = useDrop({
     accept: "bullet",
@@ -50,8 +62,14 @@ export function Draggable(
       style={{ backgroundColor: bgColor }}
       data-handler-id={collectedProps.handlerId}
     >
-      <span>{bulletText}</span>
-      <span onClick={() => removeBullet(id)}>&times;</span>
+      {editedBulletId === id
+        ? <input defaultValue={bulletText} onKeyUp={onKeyUp}/>
+        : <>
+          <AiFillEdit onClick={() => editBulletText(id)} />
+          <span>{bulletText}</span>
+          <span onClick={() => removeBullet(id)}>&times;</span>
+        </>
+      }
     </div>
   );
 }
