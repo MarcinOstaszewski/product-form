@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEdit, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 export function Draggable({
   bullet,
@@ -13,11 +13,15 @@ export function Draggable({
 }) {
   const { id, bulletText } = bullet;
   const ref = useRef(null);
+  const inputRef = useRef(null);
   const onKeyUp = (e) => {
     if (e.code === "Enter") {
-      setNewBulletText(e.target.value, id)
+      setNewBulletText(e.target.value, id);
     }
-  }
+  };
+  const enterClicked = (e) => {
+    setNewBulletText(inputRef.current.value, id);
+  };
 
   const [collectedProps, drop] = useDrop({
     accept: "bullet",
@@ -51,7 +55,7 @@ export function Draggable({
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   });
 
-  const bgColor = collectedDragProps.isDragging ? "#add1c7" : "#c0ffee";
+  const bgColor = !collectedDragProps.isDragging ? "#c0ffee" : "#add1c7";
 
   drag(drop(ref));
 
@@ -62,14 +66,24 @@ export function Draggable({
       style={{ backgroundColor: bgColor }}
       data-handler-id={collectedProps.handlerId}
     >
-      {editedBulletId === id
-        ? <input defaultValue={bulletText} onKeyUp={onKeyUp}/>
-        : <>
+      {editedBulletId === id ? (
+        <>
+          <input
+            ref={inputRef}
+            defaultValue={bulletText}
+            onKeyUp={onKeyUp}
+            className="form-control w-75 bg-transparent py-0 px-5 border-0"
+            autoFocus
+          />
+          <AiOutlineCheck onClick={enterClicked} />
+        </>
+      ) : (
+        <>
           <AiFillEdit onClick={() => editBulletText(id)} />
           <span>{bulletText}</span>
-          <span onClick={() => removeBullet(id)}>&times;</span>
+          <AiOutlineClose onClick={() => removeBullet(id)} />
         </>
-      }
+      )}
     </div>
   );
 }

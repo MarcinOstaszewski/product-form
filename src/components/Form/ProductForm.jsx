@@ -19,7 +19,7 @@ export const ProductForm = () => {
         title,
         description,
         keyword,
-        bullets: JSON.stringify(bullets),
+        bullets,
       });
     } else {
       console.log("Can't submit with errors!");
@@ -58,7 +58,7 @@ export const ProductForm = () => {
     setEditedBulletId(0);
   };
   const onOptionChange = (option) => {
-    setKeyword(option.label);
+    setKeyword(option?.label || "");
   };
 
   return (

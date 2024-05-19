@@ -37,6 +37,10 @@
   padding: .33em;
 }
 
+.bullet-text-edit-input {
+  background-color: none;
+}
+
 footer {
   position: fixed;
   bottom: 0;

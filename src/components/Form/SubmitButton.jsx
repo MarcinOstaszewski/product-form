@@ -5,7 +5,11 @@ export const SubmitButton = (
   { isDisabled }
 ) => {
   return (
-    <Button className="btn btn-primary btn-large" type="submit" disabled={isDisabled}>
+    <Button
+      className="btn btn-primary btn-large"
+      type="submit"
+      disabled={isDisabled}
+    >
       Submit Product
     </Button>
   );
