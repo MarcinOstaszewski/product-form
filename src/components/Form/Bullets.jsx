@@ -2,12 +2,12 @@ import React from "react";
 import { DropZone } from "./DropZone";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Form, FormGroup, InputGroup } from "react-bootstrap";
 
 export const Bullets = (
-  { bullets, bulletText, handleBulletTextChange, addBullet }
+  { bullets, bulletText, handleBulletTextChange, addBullet, removeBullet }
 ) => {
-  return <>
+  return <FormGroup>
     <Form.Label>Product Bullets</Form.Label>
     <InputGroup className="mb-3">
       <Form.Control
@@ -29,8 +29,8 @@ export const Bullets = (
 
     <div className="d-flex flex-column align-center">
       <DndProvider backend={HTML5Backend}>
-        <DropZone bullets={bullets} />
+        <DropZone bullets={bullets} removeBullet={removeBullet} />
       </DndProvider>
     </div>
-  </>
+  </FormGroup>
 }

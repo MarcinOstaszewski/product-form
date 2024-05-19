@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
-export function Draggable({ bullet, moveRow, index }) {
+export function Draggable(
+  { bullet, moveRow, index, removeBullet }
+) {
   const { id, bulletText } = bullet;
   const ref = useRef(null);
 
@@ -23,7 +25,7 @@ export function Draggable({ bullet, moveRow, index }) {
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top; // Dragging downwards
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
       moveRow(dragIndex, hoverIndex);
@@ -37,7 +39,7 @@ export function Draggable({ bullet, moveRow, index }) {
     collect: (monitor) => ({ isDragging: monitor.isDragging() }),
   });
 
-  const bgColor = collectedDragProps.isDragging ? "gray" : "#c0ffee";
+  const bgColor = collectedDragProps.isDragging ? "#add1c7" : "#c0ffee";
 
   drag(drop(ref));
 
@@ -49,7 +51,7 @@ export function Draggable({ bullet, moveRow, index }) {
       data-handler-id={collectedProps.handlerId}
     >
       <span>{bulletText}</span>
-      <span onClick={() => {}}>&times;</span>
+      <span onClick={() => removeBullet(id)}>&times;</span>
     </div>
   );
 }

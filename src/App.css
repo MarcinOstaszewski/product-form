@@ -1,5 +1,7 @@
 :root {
   --color-main: #c0ffee;
+  --color-secondary: #add1c7;
+  --color-dark: #466556;
 }
 
 .App {
@@ -21,6 +23,11 @@
   color: #000;
   padding: 24px 0;
   background-color: var(--color-main);
+}
+
+.form-label {
+  color: var(--color-dark);
+  font-weight: 700;
 }
 
 .error-message {

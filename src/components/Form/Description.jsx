@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, FormGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -8,8 +8,8 @@ export const Description = ({ description, setDescription }) => {
   const formats = ["bold", "italic", "underline"];
 
   return (
-    <>
-      <Form.Label>Product Description</Form.Label>
+    <FormGroup>
+      <Form.Label>Description</Form.Label>
       <ReactQuill
         className="mb-4"
         theme="snow"
@@ -17,8 +17,8 @@ export const Description = ({ description, setDescription }) => {
         onChange={setDescription}
         modules={modules}
         formats={formats}
-        placeholder="Product Description"
+        placeholder="Enter description"
       />
-    </>
+    </FormGroup>
   );
 };

@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import update from "immutability-helper";
 import { Draggable } from "./Draggable";
 
-export function DropZone({ bullets }) {
+export function DropZone(
+  { bullets, removeBullet }
+) {
   const [draggableBullets, setDraggableList] = useState([]);
 
   useEffect(() => {
@@ -27,6 +29,7 @@ export function DropZone({ bullets }) {
         key={bullet.id}
         bullet={bullet}
         moveRow={moveRow}
+        removeBullet={removeBullet}
       />
     ));
 
