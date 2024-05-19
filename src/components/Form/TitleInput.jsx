@@ -1,11 +1,12 @@
 import React from "react";
-import { FormControl } from "react-bootstrap";
+import { Form, FormControl } from "react-bootstrap";
 
-export default function TitleInput(
+export const TitleInput = (
   { title, onChange, error }
-) {
+) => {
   return (
     <>
+      <Form.Label>Product Title</Form.Label>
       <FormControl
         type="text"
         name="title"

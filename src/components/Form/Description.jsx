@@ -1,4 +1,5 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -8,6 +9,7 @@ export const Description = ({ description, setDescription }) => {
 
   return (
     <>
+      <Form.Label>Product Description</Form.Label>
       <ReactQuill
         className="mb-4"
         theme="snow"

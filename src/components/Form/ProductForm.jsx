@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, InputGroup } from "react-bootstrap";
-import { Description } from "./Description";
-import TitleInput from "./TitleInput";
-import Bullets from "./Bullets";
-import SubmitButton from "./SubmitButton";
+import { Form, FormGroup } from "react-bootstrap";
+import { Bullets, Description, TitleInput, SubmitButton } from './'
 
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
@@ -41,12 +38,10 @@ export const ProductForm = () => {
       <Form onSubmit={handleSubmit} id="product-form" role="form">
         <FormGroup>
           <FormGroup>
-            <Form.Label>Product Title</Form.Label>
             <TitleInput title={title} onChange={handleChange} error={error} />
           </FormGroup>
 
           <FormGroup>
-            <Form.Label>Product Description</Form.Label>
             <Description
               description={description}
               setDescription={setDescription}
@@ -54,28 +49,15 @@ export const ProductForm = () => {
           </FormGroup>
 
           <FormGroup>
-            <Form.Label>Product Bullets</Form.Label>
-            <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="Add Product Bullet"
-                aria-label="Product Bullet"
-                aria-describedby="basic-addon2"
-                value={bulletText}
-                onChange={handleBulletTextChange}
-              />
-              <Button
-                variant="outline-secondary"
-                id="button-addon2"
-                onClick={addBullet}
-                disabled={!bulletText}
-              >
-                Add Bullet
-              </Button>
-            </InputGroup>
-            <Bullets bullets={bullets} />
+            <Bullets 
+              bullets={bullets}
+              bulletText={bulletText}
+              handleBulletTextChange={handleBulletTextChange}
+              addBullet={addBullet}
+            />
           </FormGroup>
 
-          <SubmitButton isDisabled={!error}/>
+          <SubmitButton isDisabled={title.length === 0}/>
         </FormGroup>
       </Form>
     </>
