@@ -1,16 +1,19 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React from "react";
+import { Button } from "react-bootstrap";
 
-export const SubmitButton = (
-  { isDisabled }
-) => {
+export const SubmitButton = ({ isDisabled }) => {
   return (
-    <Button
-      className="btn btn-primary btn-large"
-      type="submit"
-      disabled={isDisabled}
-    >
-      Submit Product
-    </Button>
+    <div className="submit-button d-block">
+      <Button
+        className="btn btn-primary btn-large"
+        type="submit"
+        disabled={isDisabled}
+      >
+        Submit Product
+      </Button>
+      {isDisabled && (
+        <p className="text-danger visible-when-hovered">Title is required!</p>
+      )}
+    </div>
   );
-}
+};

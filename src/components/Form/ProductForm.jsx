@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Form, FormGroup } from "react-bootstrap";
-import { Bullets, Description, TitleInput, SubmitButton } from "./";
+import { Bullets, Description, TitleInput } from "./";
 import { CreatableSelect } from "./CreatableSelect";
+import { FormButtons } from "./FormButtons";
 
 export const ProductForm = () => {
   const [title, setTitle] = useState("");
@@ -9,9 +10,11 @@ export const ProductForm = () => {
   const [description, setDescription] = useState("");
   const [bulletText, setBulletText] = useState("");
   const [bullets, setBullets] = useState([]);
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeywords] = useState([]);
   const [nextId, setNextId] = useState({ id: 1 });
   const [editedBulletId, setEditedBulletId] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!error) {
@@ -22,11 +25,10 @@ export const ProductForm = () => {
         bullets,
       });
     } else {
-      console.log("Can't submit with errors!");
+      console.log("Can't submit form with errors!");
     }
   };
-  const handleChange = (e) => {
-    const value = e.target.value;
+  const handleChange = (value) => {
     setTitle(value);
     setError(value.length < 1 ? "Product Title is required!" : "");
   };
@@ -57,13 +59,23 @@ export const ProductForm = () => {
     );
     setEditedBulletId(0);
   };
-  const onOptionChange = (option) => {
-    setKeyword(option?.label || "");
+  const onOptionChange = (options) => {
+    const labels = options.map((option) => option.label);
+    setKeywords(labels || []);
+    setSelectedOptions(options);
+  };
+  const clearForm = () => {
+    setTitle("");
+    setDescription("");
+    setBullets([]);
+    setBulletText("");
+    setNextId({ id: 1 });
+    onOptionChange([]);
   };
 
   return (
     <>
-      <h4 className="my-4">Product form</h4>
+      <h4 className="my-4 form-header">Product form</h4>
       <Form onSubmit={handleSubmit} id="product-form" role="form">
         <FormGroup>
           <TitleInput title={title} onChange={handleChange} error={error} />
@@ -71,7 +83,10 @@ export const ProductForm = () => {
             description={description}
             setDescription={setDescription}
           />
-          <CreatableSelect onOptionChange={onOptionChange} />
+          <CreatableSelect
+            onOptionChange={onOptionChange}
+            selectedOptions={selectedOptions}
+          />
           <Bullets
             bullets={bullets}
             bulletText={bulletText}
@@ -83,7 +98,7 @@ export const ProductForm = () => {
             setEditedBulletId={setEditedBulletId}
             setNewBulletText={setNewBulletText}
           />
-          <SubmitButton isDisabled={title.length === 0} />
+          <FormButtons title={title} clearForm={clearForm} />
         </FormGroup>
       </Form>
     </>

@@ -23,22 +23,30 @@
   color: #000;
   padding: 24px 0;
   background-color: var(--color-main);
+  font-weight: 100;
+}
+
+.form-header {
+  color:  var(--color-dark);
+  font-weight: 100;
+  font-size: calc(6px + 2vmin);
 }
 
 .form-label {
   color: var(--color-dark);
-  font-weight: 700;
-}
-
-.error-message {
-  display: block;
-  color: #a00;
-  font-size: 0.9em;
-  padding: .33em;
+  font-weight: 400;
 }
 
 .bullet-text-edit-input {
   background-color: none;
+}
+
+.submit-button .visible-when-hovered {
+  display: none;
+}
+
+.submit-button:hover .visible-when-hovered {
+  display: block;
 }
 
 footer {

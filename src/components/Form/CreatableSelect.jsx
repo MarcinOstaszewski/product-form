@@ -1,25 +1,25 @@
 import React from "react";
+import Select from "react-select";
 import { Form, InputGroup } from "react-bootstrap";
-import Select from 'react-select';
-
-const keywordsOptions = [
-  {label: 'New', value: 'New'},
-  {label: 'Classic', value: 'Classic'},
-  {label: 'Modern', value: 'Modern'},
-  {label: 'Futuristic', value: 'Futuristic'},
-];
+import { keywordsOptions } from "../../constants/constants";
 
 export const CreatableSelect = (
-  { onOptionChange }
+  { onOptionChange, selectedOptions }
 ) => {
+  const handleOptionChange = (value) => {
+    onOptionChange(value);
+  };
+
   return (
     <>
       <Form.Label>Keyword</Form.Label>
       <InputGroup className="mb-4">
-        <Select 
+        <Select
           isClearable
-          onChange={onOptionChange}
+          isMulti
+          onChange={handleOptionChange}
           placeholder="Select Product Keywords"
+          value={selectedOptions}
           name="keywords"
           options={keywordsOptions}
           className="basic-multi-select w-100"

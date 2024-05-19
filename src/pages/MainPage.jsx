@@ -9,11 +9,9 @@ export default function MainPage() {
       </header>
       <main>
         <Container>
-          <Row>
-            <Col xs={12} md={6} xl={4}>
+          <Row className="d-flex justify-content-center">
+            <Col xs={12} md={6} lg={5}>
               <ProductForm />
-            </Col>
-            <Col xs={12} md={6} xl={4}>
             </Col>
           </Row>
         </Container>
